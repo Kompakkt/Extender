@@ -46,38 +46,66 @@ export class HelloWorldPlugin extends createExtenderPlugin({
   version: '1.0.0',
   // Optional
   tokenName: 'HelloWorldPlugin',
-  viewerComponents: [
-    {
-      slot: 'hello-world',
-      component: HelloWorldComponent,
-    },
-  ],
-  repoComponents: [
-    {
-      slot: 'hello-world',
-      component: HelloWorldComponent,
-    },
-  ],
+  viewerComponents: {
+    'hello-world': [HelloWorldComponent],
+  },
+  repoComponents: {
+    'hello-world': [HelloWorldComponent],
+  },
 }) {
   // Custom logic
 }
 ```
 
-### Consume plugin components using slots and SlotDirective
+### Consume plugin components using slots and ExtenderSlotDirective
 
-Notice the `slot` names in the plugin definition.
+Notice the `slot` names like `hello-world` in the plugin definition?
 
-Using these slots, we can inject the components of the plugin anywhere in Kompakkt, by using the `SlotDirective`.
-Simply import the `SlotDirective`, add it to a components' imports and use it on any HTML-tag in the template with the slot name you wish to use.
+Using these slots, we can inject the components of the plugin anywhere in Kompakkt, by using the `ExtenderSlotDirective`.
+Simply import the `ExtenderSlotDirective`, add it to a components' imports and use it on any HTML-tag in the template with the slot name you wish to use.
 
 ```ts
-import { SlotDirective } from '@kompakkt/extender';
+import { ExtenderSlotDirective } from '@kompakkt/extender';
 
 @Component({
-    template: `<div extendSlot="hello-world"></div>`,
-    standalone: true,
-    imports: [SlotDirective]
+    /* ... */
+    imports: [ExtenderSlotDirective]
 })
+```
+
+```html
+<div extendSlot="hello-world"></div>
+```
+
+### Passing data to components
+
+Each element with the `ExtenderSlotDirective` also has an input called `slotData`.
+Using this input, we can pass any data to our components.
+
+```html
+<div extendSlot="hello-world" [slotData]="{ name: 'World' }" ]></div>
+```
+
+When creating a component, you can access the `slotData` and use type guards to validate it.
+
+```ts
+@Component({
+  selector: 'lib-hello-world',
+  standalone: true,
+  template: '<p>Hello {{ name() }}</p>',
+  styles: '',
+})
+export class HelloWorldComponent extends createExtenderComponent() {
+  name = computed(() => {
+    const slotData = this.slotData();
+
+    const isHelloWorldData = (obj: unknown): obj is { name: string } => {
+      return typeof obj === 'object' && obj !== null && 'name' in obj;
+    };
+
+    return isHelloWorldData(slotData) ? slotData.name : 'World';
+  });
+}
 ```
 
 ### Injecting plugin using the plugin token
