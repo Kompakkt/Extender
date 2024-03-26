@@ -20,7 +20,6 @@ export class ExtenderSlotDirective {
 
   #viewContainerRef = inject(ViewContainerRef);
   #elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-  #injector = this.#viewContainerRef.injector;
 
   // User has to input the slot name, which will then be used to find the components for that slot
   extendSlot = input<string | undefined>();

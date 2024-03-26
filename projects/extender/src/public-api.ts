@@ -9,5 +9,4 @@ export {
   provideExtender,
 } from './lib/extender';
 export { createExtenderComponent, createExtenderPlugin } from './lib/factory';
-export { HelloWorldPlugin } from './lib/hello-world/hello-world.plugin';
 export { ExtenderSlotDirective } from './lib/slot.directive';
