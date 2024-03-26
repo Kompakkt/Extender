@@ -2,7 +2,6 @@
  * Public API Surface of extender
  */
 
-export { HelloWorldPlugin } from './hello-world/hello-world.plugin';
 export {
   ExtenderOptions,
   PLUGIN_COMPONENT_SET,
@@ -10,4 +9,5 @@ export {
   provideExtender,
 } from './lib/extender';
 export { createExtenderComponent, createExtenderPlugin } from './lib/factory';
+export { HelloWorldPlugin } from './lib/hello-world/hello-world.plugin';
 export { ExtenderSlotDirective } from './lib/slot.directive';

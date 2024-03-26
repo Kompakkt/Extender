@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-declaration-merging */
 
 import { Injectable, Type } from '@angular/core';
-import { ExtenderPluginBaseComponent } from './base-component.directive';
+import { ExtenderPluginBaseComponent } from './factory';
 
 export type ExtenderPluginType = 'data-provider' | 'login-provider' | 'addon-provider';
 

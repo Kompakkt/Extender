@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { ExtenderPluginBaseComponent } from './base-component.directive';
+import { ExtenderPluginBaseComponent } from './factory';
 import {
   ExtenderAddonProviderPlugin,
   ExtenderDataProviderPlugin,

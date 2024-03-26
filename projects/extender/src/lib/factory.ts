@@ -1,5 +1,4 @@
-import { InjectionToken, Type } from '@angular/core';
-import { ExtenderPluginBaseComponent } from './base-component.directive';
+import { Directive, InjectionToken, Type, input } from '@angular/core';
 import { ExtenderAddonProviderPlugin } from './provider';
 
 export const createExtenderPlugin = (options: {
@@ -27,6 +26,11 @@ export const createExtenderPlugin = (options: {
     static providerToken = providerToken;
   };
 };
+
+@Directive()
+export class ExtenderPluginBaseComponent {
+  readonly slotData = input<unknown>();
+}
 
 export const createExtenderComponent = () => {
   return class extends ExtenderPluginBaseComponent {};
