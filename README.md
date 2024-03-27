@@ -6,6 +6,10 @@
 
 Extension system for modularizing instances of Kompakkt.
 
+# Archival notice
+
+The Extender was moved to the [official Kompakkt plugin repository](https://github.com/Kompakkt/Plugins)
+
 ## How to use Extender in Kompakkt Viewer or Repo
 
 Use the `provideExtender`-method in the `providers` array of your ApplicationConfig (`app.config.ts`):
